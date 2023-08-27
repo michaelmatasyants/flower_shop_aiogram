@@ -17,10 +17,14 @@ from django.conf import settings
 if not settings.configured:
     django.setup()
 
-from mainapp.models import Order
+from mainapp.models import Order, User
 
 router = Router()
-router.message.filter(IsAdmin([341559729, 1110823712]))
+delivery_man_ids = [int(tg_id[0]) for tg_id
+                    in User.objects.filter(role=LEXICON['role_delivery_man'])  \
+                            .values_list('tg_id')]
+
+router.message.filter(IsAdmin(delivery_man_ids))
 
 
 @router.message(CommandStart())

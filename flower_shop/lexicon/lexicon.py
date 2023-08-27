@@ -1,6 +1,8 @@
 # Text mesages and button texts for tg bot
 
 LEXICON = {
+    'status_delivered': 'D',
+    'role_delivery_man': 'D',
     'clients_greeting': 'Добро пожаловать, {full_name}!\nЗакажите доставку '
                         'праздничного букета, собранного специально для ваших '
                         'любимых, родных и коллег. Наш букет со смыслом станет'
@@ -15,12 +17,10 @@ LEXICON = {
                             'Адрес: {delivery_address}\n',
     'instruction': 'После доставки заказа не забудьте нажать кнопку '
                    '"Заказ доставлен"',
+    'no_orders_available': 'На данный момент нет заказов для доставки.\n'
+                           'Возвращайтсесь чуть позже.',
     'thanks': 'Заказа № {order_id} доставлен',
     'next_button': 'Далее',
     'start_button': 'Начать',
     'order_delivered_button': 'Заказ доставлен',
-    'status_delivered': 'D',
-    'no_orders_available': 'На данный момент нет заказов для доставки.\n'
-                           'Возвращайтсесь чуть позже.',
-
 }
