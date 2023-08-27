@@ -9,18 +9,19 @@ class UserAdmin(admin.ModelAdmin):
 
 @admin.register(Flower)
 class FlowerAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['name', 'color']
 
 
 @admin.register(Occasion)
 class OccasionAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['name']
 
 
 @admin.register(Bouqet)
 class BouqetAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['price']  # Add 'Occasion', 'flowers' from m2m
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['status', 'user', 'bouqet', 'recipient_name',
+                    'delivery_address', 'delivery_date', 'delivery_time']
