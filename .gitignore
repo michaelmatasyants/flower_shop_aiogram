@@ -154,3 +154,5 @@ cython_debug/
 
 # Other files
 .vscode
+.DS_Store
+.idea
