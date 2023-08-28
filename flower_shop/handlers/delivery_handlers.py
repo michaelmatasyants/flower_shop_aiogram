@@ -5,7 +5,7 @@ from aiogram.types import (Message, ReplyKeyboardRemove, CallbackQuery,
                            InlineKeyboardButton, InlineKeyboardMarkup)
 from aiogram.filters import CommandStart
 from filters.is_admin import IsAdmin, IsPlaced
-from keyboards import start_keyboard
+from keyboards import start_keyboard, create_inline_kb
 from lexicon import LEXICON
 
 
@@ -21,7 +21,7 @@ from mainapp.models import Order, User
 
 router = Router()
 delivery_man_ids = [int(tg_id[0]) for tg_id
-                    in User.objects.filter(role=LEXICON['role_delivery_man'])  \
+                    in User.objects.filter(role=LEXICON['role_delivery_man']) \
                             .values_list('tg_id')]
 
 router.message.filter(IsAdmin(delivery_man_ids))
@@ -31,10 +31,10 @@ router.message.filter(IsAdmin(delivery_man_ids))
 async def process_admin_start_command(message: Message):
     await message.answer(text=LEXICON['delivery_greeting'].format(
                                 full_name=message.chat.full_name),
-                        reply_markup=start_keyboard)
+                         reply_markup=start_keyboard)
 
 
-@router.message(F.text == LEXICON['start_button'])
+@router.message(F.text == LEXICON['next_button'])
 async def process_show_orders(message: Message):
     await message.answer(text=LEXICON['instruction'],
                          reply_markup=ReplyKeyboardRemove())
