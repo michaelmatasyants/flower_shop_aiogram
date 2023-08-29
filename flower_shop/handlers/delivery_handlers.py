@@ -3,10 +3,9 @@ import time
 from aiogram import Router, F
 from aiogram.types import (Message, ReplyKeyboardRemove, CallbackQuery,
                            InlineKeyboardButton, InlineKeyboardMarkup)
-from aiogram.filters import CommandStart
 from filters.is_admin import IsAdmin, IsPlaced
-from keyboards import start_keyboard, create_inline_kb
 from lexicon import LEXICON
+from database import get_delivery_man_ids
 
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'flower_shop.settings')
@@ -17,21 +16,10 @@ from django.conf import settings
 if not settings.configured:
     django.setup()
 
-from mainapp.models import Order, User
+from mainapp.models import Order
 
 router = Router()
-delivery_man_ids = [int(tg_id[0]) for tg_id
-                    in User.objects.filter(role=LEXICON['role_delivery_man']) \
-                            .values_list('tg_id')]
-
-router.message.filter(IsAdmin(delivery_man_ids))
-
-
-@router.message(CommandStart())
-async def process_admin_start_command(message: Message):
-    await message.answer(text=LEXICON['delivery_greeting'].format(
-                                full_name=message.chat.full_name),
-                         reply_markup=start_keyboard)
+router.message.filter(IsAdmin(get_delivery_man_ids()))
 
 
 @router.message(F.text == LEXICON['next_button'])
