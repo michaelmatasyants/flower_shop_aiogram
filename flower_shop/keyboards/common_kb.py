@@ -1,11 +1,10 @@
-from aiogram.types import (KeyboardButton, ReplyKeyboardMarkup,
-                           InlineKeyboardButton, InlineKeyboardMarkup)
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from lexicon import LEXICON
 
 
-def create_inline_kb(
-        width: int, *args: str, **kwargs: str) -> InlineKeyboardMarkup:
+def create_inline_kb(width: int, *args: str,
+                     **kwargs: str) -> InlineKeyboardMarkup:
 
     kb_builder = InlineKeyboardBuilder()
     buttons = []
@@ -23,8 +22,3 @@ def create_inline_kb(
 
     kb_builder.row(*buttons, width=width)
     return kb_builder.as_markup()
-
-
-start_keyboard = ReplyKeyboardMarkup(
-                    keyboard=[[KeyboardButton(text=LEXICON['next_button'])]],
-                    resize_keyboard=True)

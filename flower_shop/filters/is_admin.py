@@ -7,8 +7,11 @@ class IsAdmin(BaseFilter):
     def __init__(self, admin_ids: list[int]) -> None:
         self.admin_ids = admin_ids
 
-    async def __call__(self, message: Message) -> bool:
-        return message.from_user.id in self.admin_ids
+    async def __call__(self, message: Message, callback=None | CallbackQuery) -> bool:
+        if message:
+            return message.from_user.id in self.admin_ids
+        if callback:
+            return callback.message.from_user.id in self.admin_ids
 
 
 class IsPlaced(BaseFilter):

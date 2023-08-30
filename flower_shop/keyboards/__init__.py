@@ -1,3 +1,3 @@
-from .client_keyboards import *
-from .delivery_keyboards import *
-from .common_keyboards import *
+from .client_kb import *
+from .delivery_kb import *
+from .common_kb import *
